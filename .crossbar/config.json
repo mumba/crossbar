@@ -65,8 +65,7 @@
           "type": "websocket",
           "endpoint": {
             "type": "tcp",
-            "port": 9002,
-            "interface": "127.0.0.1"
+            "port": 8080
           },
           "auth": {
             "wampcra": {
