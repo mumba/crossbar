@@ -1,0 +1,90 @@
+{
+  "version": 2,
+  "controller": {},
+  "workers": [
+    {
+      "type": "router",
+      "realms": [
+        {
+          "name": "test-realm",
+          "roles": [
+            {
+              "name": "backend",
+              "permissions": [
+                {
+                  "uri": "*",
+                  "allow": {
+                    "call": true,
+                    "register": true,
+                    "publish": true,
+                    "subscribe": true
+                  },
+                  "disclose": {
+                    "caller": true,
+                    "publisher": true
+                  },
+                  "cache": true
+                },
+                {
+                  "uri": "nosub.*",
+                  "allow": {
+                    "subscribe": false
+                  },
+                  "disclose": {
+                    "caller": true,
+                    "publisher": false
+                  },
+                  "cache": true
+                }
+              ]
+            },
+            {
+              "name": "authenticated",
+              "permissions": [
+                {
+                  "uri": "*",
+                  "allow": {
+                    "call": true,
+                    "register": false,
+                    "publish": false,
+                    "subscribe": true
+                  },
+                  "disclose": {
+                    "caller": true,
+                    "publisher": true
+                  },
+                  "cache": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "transports": [
+        {
+          "type": "websocket",
+          "endpoint": {
+            "type": "tcp",
+            "port": 9002,
+            "interface": "127.0.0.1"
+          },
+          "auth": {
+            "wampcra": {
+              "type": "static",
+              "users": {
+                "1": {
+                  "secret": "*password",
+                  "role": "backend"
+                },
+                "2": {
+                  "secret": "*password",
+                  "role": "authenticated"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
