@@ -1,4 +1,4 @@
-FROM crossbario/crossbar:cpy3-17.5.1
+FROM crossbario/crossbar:cpy3-18.3.1
 
 ADD .crossbar/config.json /node/.crossbar/config.json
 
